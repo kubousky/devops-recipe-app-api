@@ -1,10 +1,9 @@
----
 name: Checks
 
-on: 
+on:
   pull_request:
-    branches:
-      - [main]
+    branches: [main]
+
 jobs:
   test-lint:
     name: Test and Lint
@@ -12,4 +11,3 @@ jobs:
     secrets:
       DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
