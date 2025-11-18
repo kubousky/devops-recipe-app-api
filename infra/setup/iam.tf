@@ -133,6 +133,7 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:CreateInternetGateway",
       "ec2:AttachInternetGateway",
       "ec2:ModifyVpcAttribute",
+      "ec2:RevokeSecurityGroupIngress",
     ]
     resources = ["*"]
   }
@@ -168,6 +169,19 @@ data "aws_iam_policy_document" "rds" {
       "rds:AddTagsToResource",
     ]
     resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "iam:CreateServiceLinkedRole",
+    ]
+    resources = ["arn:aws:iam::*:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"]
+    condition {
+      test     = "StringLike"
+      variable = "iam:AWSServiceName"
+      values   = ["rds.amazonaws.com"]
+    }
   }
 }
 
