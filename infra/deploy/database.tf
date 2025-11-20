@@ -40,7 +40,7 @@ resource "aws_db_instance" "main" {
   auto_minor_version_upgrade = true
   instance_class             = "db.t4g.micro"
   username                   = var.db_username
-  password                   = jsondecode(var.db_password)["password"]
+  password                   = var.db_password
   db_subnet_group_name       = aws_db_subnet_group.main.name
   vpc_security_group_ids     = [aws_security_group.rds.id]
   skip_final_snapshot        = true
