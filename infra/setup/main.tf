@@ -7,6 +7,7 @@ terraform {
   }
 
   backend "s3" {
+    profile        = "kubousky.learning"
     bucket         = "devops-recipe-app-tf-state-kubousky"
     key            = "tf-state-setup"
     region         = "eu-west-3"
