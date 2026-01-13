@@ -11,3 +11,4 @@ docker compose run --rm terraform -chdir=setup validate
 
 docker compose run --rm terraform -chdir=setup apply
 
+#
