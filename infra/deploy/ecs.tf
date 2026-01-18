@@ -153,7 +153,7 @@ resource "aws_security_group" "ecs_service" {
   name        = "${local.prefix}-ecs-service"
   vpc_id      = aws_vpc.main.id
 
-  # Outbound access to endpoinds
+  # Outbound access to endpoints
   egress {
     from_port   = 443
     to_port     = 443
@@ -177,7 +177,7 @@ resource "aws_security_group" "ecs_service" {
     from_port = 8000
     to_port   = 8000
     protocol  = "tcp"
-    cidr_blocks = [
+    security_groups = [
       aws_security_group.lb.id
     ]
   }
@@ -185,8 +185,8 @@ resource "aws_security_group" "ecs_service" {
 
 resource "aws_ecs_service" "api" {
   name                   = "${local.prefix}-api"
-  cluster                = aws_ecs_cluster.main.id
-  task_definition        = aws_ecs_task_definition.api.arn
+  cluster                = aws_ecs_cluster.main.name
+  task_definition        = aws_ecs_task_definition.api.family
   desired_count          = 1
   launch_type            = "FARGATE"
   platform_version       = "1.4.0"
